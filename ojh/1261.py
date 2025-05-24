@@ -5,7 +5,8 @@ input=sys.stdin.readline
 
 INF=1e8
 M,N=map(int,input().rstrip().split()) # 가로크기(열), 세로크기(행)
-arr=[ list(map(int,input().rstrip())) for _ in range(N)]
+arr=[list(map(int, input().rstrip())) for _ in range(N)]
+
 dx=[1,0,-1,0]
 dy=[0,1,0,-1]
 
@@ -16,9 +17,6 @@ distance[0][0] = 0
 
 while heap:
     cost,x,y=heapq.heappop(heap)
-    
-    if x==N-1 and y==M-1:
-        break
 
     if distance[x][y]<cost:
         continue
@@ -27,9 +25,7 @@ while heap:
         nx,ny=x+dx[i],y+dy[i]
         if 0<=nx<N and 0<=ny<M :
             new_cost=cost+arr[nx][ny]
-            if new_cost>distance[nx][ny]:
-                continue
-            else:
+            if new_cost<distance[nx][ny]:
                 distance[nx][ny]=new_cost
                 heapq.heappush(heap,(new_cost,nx,ny))
                 
